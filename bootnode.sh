@@ -1,11 +1,4 @@
 #!/bin/bash
-_interupt() {
-    echo "Shutdown $child_proc"
-    kill -TERM $child_proc
-    exit
-}
-
-trap _interupt INT TERM
 
 touch .pwd
 export $(cat .env | xargs)
