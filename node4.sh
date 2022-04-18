@@ -26,12 +26,10 @@ else
   wallet4=$(${PROJECT_DIR}/build/bin/$Bin_NAME account list --datadir ./nodes/4 | head -n 1 | awk -v FS="({|})" '{print $2}')
 fi
 
-VERBOSITY=3
-GASPRICE="1"
 networkid=50
 
 
 echo Starting the nodes ...
 
-${PROJECT_DIR}/build/bin/$Bin_NAME --bootnodes "enode://048fb0712b244999f62b8c4481f7ed4b2a47632a9b56e4947396b24a8cfa4af9e5490cb36294df76421269d83668f4ac51166bdf85b03b8e912ec07c0e8ef3a6@54.234.108.3:30301" --syncmode "full" --datadir ./nodes/4 --networkid "${networkid}" --port 30306 --rpc --rpccorsdomain "*" --rpcaddr 0.0.0.0 --ws --wsaddr="0.0.0.0" --wsorigins "*" --wsport 8558 --rpcport 8548 --rpcvhosts "*" --unlock "${wallet4}" --password ./.pwd --mine --gasprice "1" --targetgaslimit "420000000" --verbosity 3 --rpcapi admin,db,eth,debug,miner,net,shh,txpool,personal,web3,XDPoS --ethstats "Leo-Node-04:xinfin_xdpos_hybrid_network_stats@stats.xinfin.network:3000" 2&1 >>XDC_node4.log | tee --append XDC_node1.log
+${PROJECT_DIR}/build/bin/$Bin_NAME --bootnodes "enode://048fb0712b244999f62b8c4481f7ed4b2a47632a9b56e4947396b24a8cfa4af9e5490cb36294df76421269d83668f4ac51166bdf85b03b8e912ec07c0e8ef3a6@54.234.108.3:30301" --syncmode "full" --datadir ./nodes/4 --networkid "${networkid}" --port 30306 --rpc --rpccorsdomain "*" --rpcaddr 0.0.0.0 --ws --wsaddr="0.0.0.0" --wsorigins "*" --wsport 8558 --rpcport 8548 --rpcvhosts "*" --unlock "${wallet4}" --password ./.pwd --mine --gasprice "1" --targetgaslimit "420000000" --verbosity 3 --rpcapi admin,db,eth,debug,miner,net,shh,txpool,personal,web3,XDPoS --ethstats "Leo-Node-04:xinfin_xdpos_hybrid_network_stats@stats.xinfin.network:3000" 2&1 >>XDC_node4.log | tee --append XDC_node4.log
 
