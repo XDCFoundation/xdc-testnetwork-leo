@@ -32,7 +32,7 @@ networkid=69
 
 
 echo Starting the bootnode ...
-${PROJECT_DIR}/build/bin/bootnode -nodekey ./bootnode.key --addr 127.0.0.3:30301 &
+${PROJECT_DIR}/build/bin/bootnode -nodekey ./bootnode.key --addr 54.234.108.3:30301 &
 child_proc=$!
 
 
