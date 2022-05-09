@@ -160,7 +160,7 @@ Export bootnode path -
 
 Follow the following steps to start the masternode -
 
-- Replace the genesis file in Local_DPoS_Setup/genesis folder with yours genesis file which you created earlier.
+- Replace the genesis file in xdc-testnetwork-leo/genesis folder with yours genesis file which you created earlier.
 - Edit node1.sh, node2.sh, node3.sh, node4.sh files by changing the and replacing the Bootnode enode-id which was generated earlier.
 - Enter the private key of the 4 masternode in the .env file, ( masternode, and signers private keys ) which was mentioned in the genesis file.
 - Give permission to all files
@@ -246,7 +246,7 @@ lsof -i
 - Add Network -
 - Network Name `XDC Testnetwork`
 - RPC- `http://<Public ip of AWS/Local>:8545`
-- Chain ID - `50`
+- Chain ID - `72`
 - Currency Symbol (Optional) - `XDC`
 - Save
 
