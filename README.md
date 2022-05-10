@@ -56,6 +56,10 @@ alias XDC=/home/ubuntu/XDPoSChain/build/bin/XDC
 alias bootnode=/home/ubuntu/XDPoSChain/build/bin/bootnode
 ```
 
+- For puppeth -
+```bash
+alias puppeth=/home/ubuntu/XDPoSChain/build/bin/puppeth
+```
 ## Step 3: Prepare Test Network Client Software -
 
 Clone the project -
@@ -101,8 +105,12 @@ Clone the project -
 
 ```bash
 cd /home/ubuntu/XDPoSChain/build/bin/
-
-./puppeth
+```
+```bash
+alias puppeth=/home/ubuntu/XDPoSChain/build/bin/puppeth
+```
+```bash
+puppeth
 ```
 
 - For Creating Genesis file follow this document - [Hackernoon.com](https://hackernoon.com/how-to-set-up-a-private-blockchain-network-with-xdc-network-codebase) **OR** [XDC Test Network](https://leewayhertz.atlassian.net/wiki/spaces/XIN/pages/3804758165/Launch+Test+Network)
@@ -189,14 +197,12 @@ Follow the following steps to start the masternode -
 
 ```bash
 Welcome to the XDC JavaScript console!
-
 instance: XDC/v1.4.4-stable-7808840b/linux-amd64/go1.17.7
 coinbase: xdcb96016369693812449d6f08e64275d5d639258d1
 at block: 10 (Mon, 28 Mar 2022 19:12:11 IST)
  datadir: /home/ubuntu/xdc-testnetwork-leo/nodes/1
  modules: XDCx:1.0 XDCxlending:1.0 XDPoS:1.0 admin:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 txpool:1.0 web3:1.0
  >
-
 ```
 
 **This is the XDC JavaScript console.**
