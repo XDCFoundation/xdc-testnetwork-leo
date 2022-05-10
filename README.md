@@ -109,7 +109,7 @@ cd /home/ubuntu/XDPoSChain/build/bin/
 
 ## Step 5: Prepare Test Network Software -
 
-Clone the Local DPoS Setup repository -
+Clone the xdc-testnetwork-leo repository -
 
 ```bash
   git clone https://github.com/XDCFoundation/xdc-testnetwork-leo.git
