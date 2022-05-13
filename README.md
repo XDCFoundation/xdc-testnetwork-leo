@@ -6,21 +6,21 @@
 
 ## Prerequisite -
 
-**Hardware requirements** -
-
-| Hardware     | Minimum   | Desired  |
-| :----------- | :-------- | :------- |
-| **Compute**: | t2 medium | t3 large |
-| **Memory**:  | 8 GB      | 16 GB    |
-| **Storage**: | 100 GB    | 500 GB   |
-
 **Software requirements** -
 
 |       Software       |                                                   Type                                                   |
 | :------------------: | :------------------------------------------------------------------------------------------------------: |
 | **Operating System** |                                      Ubuntu 20.04 64-bit or higher                                       |
-|     **Language**     |                                              Golang , Shell                                              |
+|     **Language**     |                                                Go, Shell                                                 |
 |      **Wallet**      | **[XDCPay](https://chrome.google.com/webstore/detail/xdcpay/bocpokimicclpaiekenaeelehdjllofo?hl=en-GB)** |
+
+**Hardware requirements** -
+
+|  Hardware   |      Recommanded      |
+| :---------: | :-------------------: |
+| **Compute** | t3 large AWS instance |
+| **Memory**  |         16 GB         |
+| **Storage** |     500 GB (min)      |
 
 ## Step 1: Installation -
 
@@ -44,7 +44,7 @@ export GOPATH=/home/ubuntu/go
 export PATH=$PATH:/usr/local/go/bin
 ```
 
-- After step 3.Prepare Test Network Client Software you get XDC path -
+- XDC path -
 
 ```bash
 alias XDC=/home/ubuntu/XDPoSChain/build/bin/XDC
@@ -56,10 +56,12 @@ alias XDC=/home/ubuntu/XDPoSChain/build/bin/XDC
 alias bootnode=/home/ubuntu/XDPoSChain/build/bin/bootnode
 ```
 
-- For puppeth -
+- For Puppeth -
+
 ```bash
 alias puppeth=/home/ubuntu/XDPoSChain/build/bin/puppeth
 ```
+
 ## Step 3: Prepare Test Network Client Software -
 
 Clone the project -
@@ -96,30 +98,13 @@ Clone the project -
   make all
 ```
 
-## Step 4: Customize the Genesis file Using the Puppeth Tool -
+## Step 4: Prepare Test Network Software -
 
-- **Genesis File is the file that contains all the information about the blockchain network.**
-- _Note: Use XDCPay wallet for creating accounts & Copy every mentioned account and their Private keys._
-
-- Run the Puppeth command and answer questions about your private chain.
+Clone the Masternode Setup repository - [XDC-Testnetwork-Leo](https://github.com/XDCFoundation/xdc-testnetwork-leo.git)
 
 ```bash
-cd /home/ubuntu/XDPoSChain/build/bin/
-```
-```bash
-alias puppeth=/home/ubuntu/XDPoSChain/build/bin/puppeth
-```
-```bash
-puppeth
-```
+  cd home/ubuntu
 
-- For Creating Genesis file follow this document - [Hackernoon.com](https://hackernoon.com/how-to-set-up-a-private-blockchain-network-with-xdc-network-codebase) **OR** [XDC Test Network](https://leewayhertz.atlassian.net/wiki/spaces/XIN/pages/3804758165/Launch+Test+Network)
-
-## Step 5: Prepare Test Network Software -
-
-Clone the xdc-testnetwork-leo repository -
-
-```bash
   git clone https://github.com/XDCFoundation/xdc-testnetwork-leo.git
 ```
 
@@ -128,6 +113,30 @@ Clone the xdc-testnetwork-leo repository -
 ```bash
   cd xdc-testnetwork-leo
 ```
+
+## Step 5: Customize the Genesis file Using the Puppeth Tool -
+
+- **Genesis File is the file that contains all the information about the blockchain network.**
+- _Note: Use XDCPay wallet for creating accounts & Take a note of every mentioned account and their Private keys._
+
+- Run the Puppeth command and answer questions about your private chain.
+
+```bash
+cd /home/ubuntu/xdc-testnetwork-leo/genesis
+```
+
+- Delete the existing Genesis file - `rm -rf genesis.json`
+- Set Path for Puppeth tool -
+
+```bash
+alias puppeth=/home/ubuntu/XDPoSChain/build/bin/puppeth
+```
+
+```bash
+puppeth
+```
+
+- For Creating Genesis file follow this document - [Hackernoon.com](https://hackernoon.com/how-to-set-up-a-private-blockchain-network-with-xdc-network-codebase)
 
 ## Step 6: Setup Bootnode -
 
@@ -168,8 +177,7 @@ Export bootnode path -
 
 Follow the following steps to start the masternode -
 
-- Replace the genesis file in xdc-testnetwork-leo/genesis folder with yours genesis file which you created earlier.
-- Edit node1.sh, node2.sh, node3.sh, node4.sh files by changing the and replacing the Bootnode enode-id which was generated earlier.
+- Edit node1.sh, node2.sh, node3.sh, node4.sh files by replacing the Bootnode enode-id which was generated earlier.
 - Enter the private key of the 4 masternode in the .env file, ( masternode, and signers private keys ) which was mentioned in the genesis file.
 - Give permission to all files
 
@@ -185,18 +193,25 @@ Follow the following steps to start the masternode -
   Respectively same for more nodes...
 ```
 
+- **For Different Geo-Locations You need multiple AWS instances, atleast four instances for four MasterNodes, Repeat the steps till step-7 & keep same bootnode key & bootnode enode-id for every node Setup.**
+
 ## Step 8: Check Your Private Chain -
 
-- Connect ipc -
+- Connect ipc endpoint -
 
-`cd home/ubuntu/xdc-testnetwork-leo/nodes/1`
+```bash
+cd home/ubuntu/xdc-testnetwork-leo/nodes/1
+```
 
-`XDC attach XDC.ipc`
+```bash
+XDC attach XDC.ipc
+```
 
 - Output should look like this -
 
 ```bash
 Welcome to the XDC JavaScript console!
+
 instance: XDC/v1.4.4-stable-7808840b/linux-amd64/go1.17.7
 coinbase: xdcb96016369693812449d6f08e64275d5d639258d1
 at block: 10 (Mon, 28 Mar 2022 19:12:11 IST)
@@ -229,7 +244,7 @@ _Commands -_
 
 - `admin.nodeInfo.enode` It gives you the enode id.
 
-## Step 9: Troubleshooting (To stop the nodes or if you encounter any issues use) -
+## Step 9: Troubleshooting (To stop the nodes or if you encounter any issues) -
 
 - Run -
 
@@ -252,14 +267,15 @@ lsof -i
 - Add Network -
 - Network Name `XDC Testnetwork`
 - RPC- `http://<Public ip of AWS/Local>:8545`
-- Chain ID - `72`
+- Chain ID - `50`
 - Currency Symbol (Optional) - `XDC`
 - Save
 
 ## 2. Connect XDC Test Network with XDC Network Stats -
 
-- Format - `--ethstats value` Reporting URL of a ethstats service (nodename:secret@host:port)
-- For XDC Network States - `--ethstats "Node-01:xinfin_xdpos_hybrid_network_stats@stats.xinfin.network:3000"`
+- For Connect XDC Network Stats with Test Network - Need to add `--ethstats` flag in Node.sh script files.
+- Format - `--ethstats value` Reporting URL of a ethstats service - `(nodename:secret@host:port)`
+- Example - `--ethstats "Node-01:xinfin_xdpos_hybrid_network_stats@stats.xinfin.network:3000"`
 
 ## 3. Connect XDC Test Network with Testnet faucet -
 
@@ -267,9 +283,9 @@ lsof -i
 
 - Clone repository - `git clone https://github.com/XDCFoundation/xdc-faucet-leo-backend.git`
 - Update config.json ./config.json (see config.json with placeholders below)
-- npm install from project's root - `npm i`
+- npm install from project's root - `npm install`
 - Start the localhost server - `npm run dev`
-- Server config.json (./config.json) with placeholders
+- Server config.json (./config.json) with placeholders -
 
 ```bash
 "Ethereum": {
@@ -289,7 +305,7 @@ lsof -i
 **Frontend -**
 
 - Clone repository - `git clone https://github.com/XDCFoundation/xdc-faucet-leo.git`
-- Install Node Modules - `npm i`
+- Install Node Modules - `npm install`
 - Start the localhost server - `npm start`
 
 - Ex - [XDC Faucet](https://faucet.euphrates.network/)
